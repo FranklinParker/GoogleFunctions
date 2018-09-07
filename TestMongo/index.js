@@ -11,7 +11,7 @@ var helloFn = function helloFn(req, res) {
         .then(records => {
             console.log('records', records);
             res.status(200)
-                .send({result: true, records: records});
+                .send({result: true,message:'modularizied', records: records});
         });
 };
 
