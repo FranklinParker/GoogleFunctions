@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
+const sequelize = new Sequelize('world', 'foo','bar', {
+    host: '127.0.0.1',
     dialect: 'mysql',
 
     pool: {
@@ -12,7 +12,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 
 
     // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-    operatorsAliases: false
+    operatorsAliases: true
 });
 
 const User = sequelize.define('user', {
