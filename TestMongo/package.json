@@ -9,6 +9,7 @@
   "author": "Franklin Parker",
   "license": "ISC",
   "dependencies": {
-    "moongoose": "0.0.5"
+    "cors": "^2.8.4",
+    "mongoose": "^5.2.13"
   }
 }
