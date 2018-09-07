@@ -1,3 +1,7 @@
+//  needed to create user via:
+// CREATE USER 'foo'@'%' IDENTIFIED WITH mysql_native_password BY 'bar';
+// than grant privalages via tool
+
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('world', 'foo','bar', {
     host: '127.0.0.1',
