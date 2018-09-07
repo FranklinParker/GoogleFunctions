@@ -17,10 +17,12 @@ const User = mongoose.model('User', UserSchema);
 
 // my function
 var helloFn = function helloFn(req, res) {
+    console.log('in hellofn');
     User.find()
-        .then(records=>{
+        .then(records => {
+            console.log('records', records);
             res.status(200)
-                .send({result:true, records: records});
+                .send({result: true, records: records});
         });
 
 
@@ -28,8 +30,10 @@ var helloFn = function helloFn(req, res) {
 
 // CORS and Cloud Functions export logic
 exports.hello = function hello(req, res) {
+    console.log('in hello');
     var corsFn = cors();
-    corsFn(req, res, function() {
+    corsFn(req, res, function () {
+        console.log('in corsfn');
         helloFn(req, res);
     });
 }
