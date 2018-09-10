@@ -77,7 +77,11 @@ const findAllCountryCode = () => {
     CountryCode.findAll(
         {
             attributes: ['CountryCode', 'Language', 'IsOfficial', 'Percentage']
-        }).then((records) => {
+        }).then((result) => {
+        const records  = [];
+        result.forEach((record) => {
+            records.push(record.dataValues);
+        });
         console.log('records', records);
     });
 }
