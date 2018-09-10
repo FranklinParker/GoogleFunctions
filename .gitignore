@@ -1,5 +1,6 @@
 TestMongo/node_modules
 TestMySql/node_modules
+MySqlFunctionTest/node_modules
 .idea/*
 .idea/vcs.xml
 .idea/vcs.xml
