@@ -5,7 +5,7 @@ database.connectToDb();
 
 
 // my function
-var helloFn = function helloFn(req, res) {
+var findRecords = function findRecords(req, res) {
     console.log('in hellofn');
     User.find()
         .then(records => {
@@ -16,12 +16,12 @@ var helloFn = function helloFn(req, res) {
 };
 
 // CORS and Cloud Functions export logic
-exports.hello = function hello(req, res) {
+exports.testMongo = function testMongo(req, res) {
     console.log('in hello');
     var corsFn = cors();
     corsFn(req, res, function () {
         console.log('in corsfn');
-        helloFn(req, res);
+        findRecords(req, res);
     });
 }
 
