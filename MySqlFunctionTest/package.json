@@ -9,6 +9,7 @@
   "author": "Franklin Parker",
   "license": "ISC",
   "dependencies": {
+    "mysql": "^2.16.0",
     "mysql2": "^1.6.1",
     "sequelize": "^4.38.0"
   }
