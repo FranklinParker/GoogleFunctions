@@ -1,9 +1,9 @@
 onst mysql = require('mysql2');
 
-const connectionName = 'cf-poc-database-instance';
-const dbUser = 'root';
-const dbPass = 'GOOd#most!';
-const dbName = 'location-index';
+const connectionName = process.env.DB_INSTANCE;
+const dbUser = process.env.DB_USER;
+const dbPass = process.env.DB_PASSWORD;
+const dbName = process.env.DB_NAME;
 
 const pool = mysql.createPool({
     connectionLimit : 1,
