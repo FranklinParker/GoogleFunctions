@@ -4,3 +4,4 @@ MySqlFunctionTest/node_modules
 .idea/*
 .idea/vcs.xml
 .idea/vcs.xml
+TestMySql/loccalconfig.json
