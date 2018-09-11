@@ -5,3 +5,6 @@ MySqlFunctionTest/node_modules
 .idea/vcs.xml
 .idea/vcs.xml
 TestMySql/loccalconfig.json
+TestMySql/cert/client-cert.pem
+TestMySql/cert/client-key.pem
+TestMySql/cert/server-ca.pem
