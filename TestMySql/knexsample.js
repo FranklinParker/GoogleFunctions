@@ -5,14 +5,13 @@ const Knex = require('knex');
 const knex = connect();
 
 
-
-function connect () {
+function connect() {
     // [START connect]
     const config = {
         user: appConfig.DB_USER,
         password: appConfig.DB_PASSWORD,
         database: appConfig.DB_SCHMEMA,
-        host:  appConfig.DB_URI,
+        host: appConfig.DB_URI,
 
     };
     console.log('knex', config);
@@ -33,15 +32,17 @@ const localTest = function (req, res) {
     console.log('local test of  knex');
 
     knex('city')
-        .select('name')
+        .select('name','countrycode')
         .orderBy('name', 'desc')
         .limit(10)
         .then((results) => {
             console.log('results', results);
-        });
+        }).catch(err => {
+        console.log('err', err);
+    });
 
 
 };
 
-localTest()
-  
+localTest();
+
