@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const cors = require('cors');
 
 const connectionName = process.env.DB_INSTANCE;
 const dbUser = process.env.DB_USER;
@@ -17,7 +18,7 @@ const config = {
 console.log('DBConfig:', config);
 const pool = mysql.createPool(config);
 
-exports.cloudSQLTest = function (req, res) {
+const getRecords = function (req, res) {
     pool.query('SELECT NOW() AS now', (error, results, fields) => {
         console.log('query results', results);
         console.log('query error', error);
@@ -28,3 +29,14 @@ exports.cloudSQLTest = function (req, res) {
         }
     });
 };
+
+
+// CORS and Cloud Functions export logic
+exports.testSQL = function testGetSql(req, res) {
+    console.log('in test hello');
+    var corsFn = cors();
+    corsFn(req, res, function () {
+        console.log('in corsfn');
+        getRecords(req, res);
+    });
+}
