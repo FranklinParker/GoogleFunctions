@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const fs = require('fs');
-const appConfig = require('./appconfig');
+const appConfig = require('./appconfig').localDB;
 const Knex = require('knex');
 const knex = connect();
 
