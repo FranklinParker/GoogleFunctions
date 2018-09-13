@@ -21,7 +21,7 @@ const getContacts =  async () =>{
             });
         return {success: true, records: records};;
 
-    } catch(e){
+    } catch(err){
         return {success: false, error: err};
     }
 
