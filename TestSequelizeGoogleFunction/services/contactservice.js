@@ -1,31 +1,33 @@
-const { Contact, findAllContacts } = require('../models/contact').contactDB;
+const { Contact } = require('../models/contact').contactDB;
 
 
-
-const getContacts = (callback) => {
-    findAllContacts()
-        .then((records) => {
-            callback({success: true, records: records});
-        }).catch(err => {
-        callback({success: false, error: err});
-    });
-
-}
-
-const getContactsFromDB = (callback) =>{
-    Contact.findAll()
-        .then(result=>{
-            const records = [];
-            result.forEach((record) => {
-                records.push(record.dataValues);
-            });
-            callback({success: true, records: records});
+/**
+ * Get all contacts
+ *
+ *
+ * @returns {Promise<{success: boolean, error: *}>}
+ */
+const getContacts =  async () =>{
+    try{
+        const records = await Contact.findAll({
+            attributes: ['name', 'email']
         })
-        .catch(err => {
-            callback({success: false, error: err});
-        });
+            .then(result=>{
+                const records = [];
+                result.forEach((record) => {
+                    records.push(record.dataValues);
+                });
+                return records;
+            });
+        return {success: true, records: records};;
+
+    } catch(e){
+        return {success: false, error: err};
+    }
+
 }
 
 module.exports = {
     getContacts
+
 }

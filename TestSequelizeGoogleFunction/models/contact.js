@@ -29,19 +29,7 @@ const Contact = connection.define('contact', {
     });
 
 
-const findAllContacts = ()=> {
-    return Contact.findAll({
-        attributes: ['name', 'email']
-    }).then(result=>{
-        const records = [];
-        result.forEach((record) => {
-            records.push(record.dataValues);
-        });
-        return records;
-    });
-}
 
 module.exports.contactDB ={
-    findAllContacts,
     Contact
 }

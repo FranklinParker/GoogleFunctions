@@ -1,6 +1,7 @@
 const contactservice = require('./services/contactservice');
 
-
-contactservice.getContacts((results)=>{
-    console.log('results', results);
-})
+const testContactGetAll = async ()=> {
+    const result = await contactservice.getContacts();
+    console.log('get contacts', result);
+}
+testContactGetAll();
