@@ -9,12 +9,12 @@ const dbName = process.env.DB_NAME;
 
 
 const sequelize = new Sequelize(dbName, dbUser, dbPass, {
-  host: 'localhost',
-  dialect: 'mysql',
-  dialectOptions: {
- 	socketPath: '/cloudsql/' +connectionName
-  },
-  pool: {
+    host: 'localhost',
+    dialect: 'mysql',
+    dialectOptions: {
+        socketPath: '/cloudsql/' +connectionName
+    },
+    pool: {
         max: 1,
         min: 0,
         acquire: 30000,
@@ -26,8 +26,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
     operatorsAliases: true
 });
 
-
-const Contacts = sequelize.define('contacts', {
+const Contacts = sequelize.define('contact', {
         Name: Sequelize.STRING(50),
         email: Sequelize.STRING(100),
 
@@ -67,12 +66,13 @@ const getRecords = function (req, res) {
         console.log('records', records);
         res.status(200).send({success:true, records: records});
     }).catch(err=>{
-      res.status(200).send({success:false, error: err});
+        res.status(200).send({success:false, error: err});
     });
 };
 
 // CORS and Cloud Functions export logic
 exports.testSQL = function testGetSql(req, res) {
+    console.log('in test hello');
     var corsFn = cors();
     corsFn(req, res, function () {
         console.log('in corsfn');
