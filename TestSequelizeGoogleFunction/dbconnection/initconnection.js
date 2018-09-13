@@ -40,7 +40,8 @@ const operatorsAliases = {
 };
 config.sequelizeConfig.operatorsAliases= operatorsAliases;
 
-const connection = new Sequelize(config.DB_SCHMEMA, config.DB_USER, config.DB_PASSWORD,
+const connection = new Sequelize(config.DB_SCHMEMA, config.DB_USER,
+    config.DB_PASSWORD,
     config.sequelizeConfig);
 
 
