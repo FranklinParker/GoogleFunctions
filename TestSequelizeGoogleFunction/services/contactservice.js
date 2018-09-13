@@ -1,9 +1,6 @@
-//  needed to create user via:
-// CREATE USER 'foo'@'%' IDENTIFIED WITH mysql_native_password BY 'bar';
-// than grant privalages via tool
 
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('test', 'foo', 'bar', {
+const sequelize = new Sequelize('test_schema', 'foo', 'bar', {
     host: '127.0.0.1',
     dialect: 'mysql',
 
@@ -19,37 +16,11 @@ const sequelize = new Sequelize('test', 'foo', 'bar', {
     operatorsAliases: true
 });
 
-const User = sequelize.define('user', {
-    username: Sequelize.STRING,
-    birthday: Sequelize.DATE
-});
 
-const createUser = () => {
-    sequelize.sync()
-        .then(() => User.create({
-            username: 'janedoe',
-            birthday: new Date(1980, 6, 20)
-        }))
-        .then(jane => {
-            console.log(jane.toJSON());
-        });
-}
+const Contacts = sequelize.define('contact', {
+        Name: Sequelize.STRING(50),
+        email: Sequelize.STRING(100),
 
-
-/**
- *
- * CountryCode char(3) PK
- Language char(30) PK
- IsOfficial enum('T','F')
- Percentage float(4,1)
- * @type {Model}
- */
-
-const CountryCode = sequelize.define('CountryLanguage', {
-        CountryCode: Sequelize.STRING(3),
-        Language: Sequelize.STRING(30),
-        IsOfficial: Sequelize.ENUM('T', 'F'),
-        Percentage: Sequelize.FLOAT(4, 1)
     },
     {
         // don't add the timestamp attributes (updatedAt, createdAt)
@@ -73,17 +44,25 @@ const CountryCode = sequelize.define('CountryLanguage', {
         // tableName: 'my_very_custom_table_name'
     });
 
-const findAllCountryCode = () => {
-    CountryCode.findAll(
+
+
+const getContacts = (callback)=>{
+    Contacts.findAll(
         {
-            attributes: ['CountryCode', 'Language', 'IsOfficial', 'Percentage']
+            attributes: ['name', 'email']
         }).then((result) => {
         const records = [];
         result.forEach((record) => {
             records.push(record.dataValues);
         });
         console.log('records', records);
+        callback({success:true, records: records});
+    }).catch(err=>{
+        callback({success:false, error: err});
     });
+
 }
 
-findAllCountryCode();
+module.exports = {
+    getContacts
+}
