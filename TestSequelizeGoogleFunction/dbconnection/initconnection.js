@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+const config = require('../config');
+
 const Op = Sequelize.Op;
 const operatorsAliases = {
     $eq: Op.eq,
@@ -36,22 +38,10 @@ const operatorsAliases = {
     $values: Op.values,
     $col: Op.col
 };
+config.sequelizeConfig.operatorsAliases= operatorsAliases;
 
-const connection = new Sequelize('test_schema', 'foo', 'bar', {
-    host: '127.0.0.1',
-    dialect: 'mysql',
-    operatorsAliases,
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    },
-
-
-    // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-    //operatorsAliases: true
-});
+const connection = new Sequelize(config.DB_SCHMEMA, config.DB_USER, config.DB_PASSWORD,
+    config.sequelizeConfig);
 
 
 module.exports = {
