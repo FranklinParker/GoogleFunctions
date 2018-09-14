@@ -1,8 +1,18 @@
 const connection = require('../dbconnection/initconnection').connection;
 const Sequelize = require('sequelize');
+/**
+ * CREATE TABLE `test_schema`.`user` (
+ `email` VARCHAR(100) NULL,
+ `firstName` VARCHAR(45) NULL,
+ `lastName` VARCHAR(45) NULL,
+ `password` VARCHAR(100) NULL);
 
+ * @type {Model}
+ */
 const User = connection.define('user', {
-        user: Sequelize.STRING(50),
+        firstName: Sequelize.STRING(45),
+        lastName:  Sequelize.STRING(45),
+        email: Sequelize.STRING(100),
         password: Sequelize.STRING(100),
 
     },
@@ -37,19 +47,23 @@ User.removeAttribute('id');
  * @param user
  * @returns {Promise<void>}
  */
-const findByUser = async (user) => {
+const findByUser = async (email) => {
     try {
         return User.findOne({
-            attributes: ['user', 'password'],
+            attributes: ['firstName', 'lastName','email'],
             where: {
-                user: user
+                email: email
             }
         }).then((result) => {
             console.log('one record found', result);
             if (result && result.user) {
                 return {
                     found: true, error: false,
-                    record: {user: result.user, passord: result.password}
+                    record: {
+                        email: result.email,
+                        firstName: result.firstName,
+                        lastName: result.lastName
+                    }
                 };
             } else {
                 return {found: false, error: false, user: undefined};

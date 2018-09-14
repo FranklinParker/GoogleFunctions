@@ -7,7 +7,7 @@ const testContactGetAll = async ()=> {
 }
 
 const testRegisterUser = async ()=>{
-    const result = await userservice.register('test4', 'test4pw');
+    const result = await userservice.register('joe','brown','test4', 'test4pw');
     console.log('register result', result);
 }
 testContactGetAll();

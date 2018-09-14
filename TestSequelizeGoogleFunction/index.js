@@ -11,10 +11,10 @@ const cors = require('cors');
  */
 const register = async function (req, res) {
     try{
-        const {user, password }= req.body;
+        const {firstName, lastName, email, password }= req.body;
         console.log('user:' + user);
         console.log('password:' + password);
-        const result = await  UserService.register(user,password);
+        const result = await  UserService.register(firstName, lastName,email, password);
         res.status(200).send(result);
     } catch(err){
         res.status(200).send({success:false, error: err});
