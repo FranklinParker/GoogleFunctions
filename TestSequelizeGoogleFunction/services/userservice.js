@@ -13,6 +13,7 @@ const register =  async (firstName, lastName,email, password) =>{
         const result = await findUserByEmail(email);
 
         if(result.found){
+            console.log('result', result);
             return { success: false, message: 'cannot create user - exists'};
         }else{
             const salt = bcrypt.genSaltSync(10);

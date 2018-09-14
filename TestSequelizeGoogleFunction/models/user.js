@@ -56,15 +56,10 @@ const findUserByEmail = async (email) => {
                 email: email
             }
         }).then((result) => {
-            console.log('one record found', result);
-            if (result && result.email) {
+            if (result) {
                 return {
                     found: true, error: false,
-                    record: {
-                        email: result.email,
-                        firstName: result.firstName,
-                        lastName: result.lastName
-                    }
+                    record: result.dataValues
                 };
             } else {
                 return {found: false, error: false, user: undefined};
