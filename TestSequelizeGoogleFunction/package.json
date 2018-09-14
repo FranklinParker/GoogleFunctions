@@ -9,6 +9,7 @@
   "author": "Franklin Parker",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.4",
     "mysql2": "^1.6.1",
     "sequelize": "^4.38.1"
