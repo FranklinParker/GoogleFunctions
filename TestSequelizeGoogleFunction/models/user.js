@@ -28,6 +28,8 @@ const User = connection.define('user', {
         // tableName: 'my_very_custom_table_name'
     });
 
+User.removeAttribute('id');
+
 /**
  * find user by user
  *
@@ -35,23 +37,37 @@ const User = connection.define('user', {
  * @param user
  * @returns {Promise<void>}
  */
-const findByUser = async (user)=>{
-     return User.findOne({
-        attributes: ['user', 'password'],
-        where: {
-            user: user
-        }
-    }).then((result) => {
-        console.log('one record found',result.user);
-        if(result.user){
-            return { found: true,error:false,
-                record: { user: result.user, passord: result.password}};
-        } else{
-            return { found: false,error:false, user: undefined};
-        }
-    });
+const findByUser = async (user) => {
+    try {
+        return User.findOne({
+            attributes: ['user', 'password'],
+            where: {
+                user: user
+            }
+        }).then((result) => {
+            console.log('one record found', result);
+            if (result && result.user) {
+                return {
+                    found: true, error: false,
+                    record: {user: result.user, passord: result.password}
+                };
+            } else {
+                return {found: false, error: false, user: undefined};
+            }
+        });
+    } catch (err) {
+        return {found: false, error: true, message: err};
+    }
+
 }
-module.exports.userDB ={
+
+const createUser = async  (user, password) =>{
+    const result =  User.create({ user, password});
+    return result;
+}
+
+module.exports.userDB = {
     User,
-    findByUser
+    findByUser,
+    createUser
 }
