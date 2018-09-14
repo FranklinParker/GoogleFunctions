@@ -43,9 +43,10 @@ const getAllContacts = async function (req, res) {
  */
 const routeRequest = async function (req, res) {
     const url = req.url;
-    if(url==='getContacts'){
+    console.log('url:'+ url);
+    if(url==='/getContacts'){
         getAllContacts(req,res);
-    } else if(url==='register'){
+    } else if(url==='/register'){
         register(req, res);
     }else{
         res.status(401).send({ error: ' unknown route'});
