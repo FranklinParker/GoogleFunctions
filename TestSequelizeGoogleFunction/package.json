@@ -2,13 +2,14 @@
   "name": "testsequelizegooglefunction",
   "version": "1.0.0",
   "description": "",
-  "main": "localtest.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Franklin Parker",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.4",
     "mysql2": "^1.6.1",
     "sequelize": "^4.38.1"
   }

@@ -12,3 +12,4 @@ TestMySql/appconfig.json
 TestSequelizeGoogleFunction/config/appconfig.json
 TestSequelizeGoogleFunction/node_modules
 TestSequelizeGoogleFunction/npm
+TestSequelizeGoogleFunction/getContacts.zip
