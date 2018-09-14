@@ -1,13 +1,4 @@
-/**
- *
- *
- const connectionName = process.env.DB_INSTANCE;
- const dbUser = process.env.DB_USER;
- const dbPass = process.env.DB_PASSWORD;
- const dbName = process.env.DB_NAME;
 
- * @type {{DB_SCHMEMA: string, DB_USER: string, DB_PASSWORD: string, sequelizeConfig: {host: string, dialect: string, dialectOptions: {socketPath: string}, pool: {pool: {max: number, min: number, acquire: number, idle: number}}}}}
- */
 
 const config = {
     DB_SCHMEMA: process.env.DB_NAME,
@@ -30,3 +21,4 @@ const config = {
         }
     }
 }
+module.exports = config;

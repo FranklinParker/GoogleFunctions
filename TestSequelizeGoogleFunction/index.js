@@ -11,7 +11,7 @@ const cors = require('cors');
 const getAllContacts = async function (req, res) {
     try{
         const result = await  ContactService.getContacts();
-        res.status(200).send({success:true, result: result})
+        res.status(200).send(result);
     } catch(err){
         res.status(200).send({success:false, error: err});
     }

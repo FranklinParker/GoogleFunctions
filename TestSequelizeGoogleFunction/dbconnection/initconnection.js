@@ -39,7 +39,7 @@ const operatorsAliases = {
     $col: Op.col
 };
 config.sequelizeConfig.operatorsAliases= operatorsAliases;
-
+console.log('config:', config);
 const connection = new Sequelize(config.DB_SCHMEMA, config.DB_USER,
     config.DB_PASSWORD,
     config.sequelizeConfig);
