@@ -1,13 +1,27 @@
 const ContactService = require('./services/contactservice');
+const UserService = require('./services/userservice');
 const cors = require('cors');
 /**
- * method to get all contacts
+ * register a user
  *
  *
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
+const register = async function (req, res) {
+    try{
+        const {user, password }= req.body;
+        console.log('user:' + user);
+        console.log('password:' + password);
+        const result = await  UserService.register(user,password);
+        res.status(200).send(result);
+    } catch(err){
+        res.status(200).send({success:false, error: err});
+    }
+
+};
+
 const getAllContacts = async function (req, res) {
     try{
         const result = await  ContactService.getContacts();
@@ -18,12 +32,34 @@ const getAllContacts = async function (req, res) {
 
 };
 
+
+/**
+ * route
+ *
+ *
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+const processRequest = async function (req, res) {
+    const url = req.url;
+    if(url==='getContacts'){
+        getAllContacts(req,res);
+    } else if(url==='register'){
+        register(req, res);
+
+    }
+
+
+};
+
+
 // CORS and Cloud Functions export logic
 exports.getContacts = async function getContacts(req, res) {
-    console.log('in get Contacts');
+    console.log('Contacts');
     var corsFn = cors();
     corsFn(req, res, function () {
         console.log('in corsfn');
-        getAllContacts(req, res);
+        processRequest(req, res);
     });
 }

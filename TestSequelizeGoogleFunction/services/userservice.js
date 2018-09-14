@@ -1,5 +1,6 @@
 const { User, findByUser, createUser} = require('../models/user').userDB;
 
+const bcrypt = require('bcryptjs');
 
 /**
  * register a user
@@ -12,9 +13,13 @@ const register =  async (user, password) =>{
         const result = await findByUser(user);
 
         if(result.found){
-            return result;
+            return { success: false, message: 'cannot create user - exists'};
         }else{
-            return createUser(user,password);
+            const salt = bcrypt.genSaltSync(10);
+            const passwordHash = bcrypt.hashSync(password, salt);
+            const result = await createUser(user,passwordHash);
+            console.log('user created: ', result.dataValues);
+            return { success: true, message: ' User created'};
         }
 
 
