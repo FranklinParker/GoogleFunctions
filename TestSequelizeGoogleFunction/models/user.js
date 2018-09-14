@@ -47,7 +47,8 @@ User.removeAttribute('id');
  * @param user
  * @returns {Promise<void>}
  */
-const findByUser = async (email) => {
+const findUserByEmail = async (email) => {
+    console.log('find by :')
     try {
         return User.findOne({
             attributes: ['firstName', 'lastName','email'],
@@ -56,7 +57,7 @@ const findByUser = async (email) => {
             }
         }).then((result) => {
             console.log('one record found', result);
-            if (result && result.user) {
+            if (result && result.email) {
                 return {
                     found: true, error: false,
                     record: {
@@ -75,13 +76,13 @@ const findByUser = async (email) => {
 
 }
 
-const createUser = async  (user, password) =>{
-    const result =  User.create({ user, password});
+const createUser = async  (user) =>{
+    const result =  User.create(user);
     return result;
 }
 
 module.exports.userDB = {
     User,
-    findByUser,
+    findUserByEmail,
     createUser
 }

@@ -1,4 +1,4 @@
-const { User, findByUser: findUserByEmail, createUser} = require('../models/user').userDB;
+const {   findUserByEmail, createUser} = require('../models/user').userDB;
 
 const bcrypt = require('bcryptjs');
 
