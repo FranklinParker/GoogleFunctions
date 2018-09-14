@@ -41,13 +41,14 @@ const getAllContacts = async function (req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-const processRequest = async function (req, res) {
+const routeRequest = async function (req, res) {
     const url = req.url;
     if(url==='getContacts'){
         getAllContacts(req,res);
     } else if(url==='register'){
         register(req, res);
-
+    }else{
+        res.status(401).send({ error: ' unknown route'});
     }
 
 
@@ -55,11 +56,11 @@ const processRequest = async function (req, res) {
 
 
 // CORS and Cloud Functions export logic
-exports.getContacts = async function getContacts(req, res) {
+exports.processRequest = async (req, res)=> {
     console.log('Contacts');
     var corsFn = cors();
     corsFn(req, res, function () {
         console.log('in corsfn');
-        processRequest(req, res);
+        routeRequest(req, res);
     });
 }
