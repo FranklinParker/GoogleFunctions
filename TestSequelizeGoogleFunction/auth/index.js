@@ -24,3 +24,9 @@ const loginAuth = (params)=>{
     throw new Error('not authenticated');
   }
 }
+
+
+module.exports=  {
+  loginAuth,
+  checkIfAuthenticateRequired
+}

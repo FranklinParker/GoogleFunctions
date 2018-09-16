@@ -1,5 +1,6 @@
 const contactservice = require('./services/contactservice');
 const userservice = require('./services/userservice');
+const { process} = require('./routing');
 
 const testContactGetAll = async ()=> {
     const result = await contactservice.getContacts();
@@ -15,6 +16,14 @@ const testGetUsers  = async ()=> {
   const result = await userservice.getAllUsers();
   console.log('get users', result);
 }
+
+const testRouting =  async (key)=>{
+  const result = await process('users', {});
+  console.log(`${key} result ${JSON.stringify(result)}`);
+
+}
 //testContactGetAll();
-testGetUsers();
-testRegisterUser();
+//testGetUsers();
+//testRegisterUser();
+testRouting('users');
+
