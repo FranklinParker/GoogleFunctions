@@ -31,7 +31,9 @@ const authMethod2 = (params) => {
     throw new Error(' Auth failed 2nd');
   }
 }
-
+const register = (params)=>{
+  return { success: true, message:'register worked'};
+}
 
 const processMap = {
   'contacts': {
@@ -39,11 +41,8 @@ const processMap = {
     processMethod: processContact
   },
   'register': {
-    id: 2,
-    email: 'admin@gmail.com',
-    // normal user (password is Password10), does not have access to login as another user functionality
-    passwordDigest: '$argon2i$v=19$m=4096,t=3,p=1$vfrhde0OMBNSSE9rRWtVrQ$gBaNgJFPBZfzuvrzfX8iSr2+OCD8K8Iu/JjwpYp8/TY',
-    roles: ['STUDENT', 'ADMIN']
+   // authMethods: [authMethod,authMethod2],
+    processMethod: register
   }
 };
 
@@ -67,8 +66,13 @@ const result = process('contacts', {
   user: 'joe',
   password: 'pw'
 });
-
 console.log('result', result);
+
+const result2 = process('register', {
+
+});
+console.log('result2 register', result2);
+
 
 
 
