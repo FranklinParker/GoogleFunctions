@@ -7,12 +7,13 @@ const processContact = (params)=> {
 }
 
 
-const checkAuthIfRequired = (params, authMethod)=>{
-  if(!authMethod){
+const checkAuthIfRequired = (params, authMethods)=>{
+  if(!authMethods){
     return;
   }
   try{
-    authMethod(params);
+
+    authMethods.forEach(authMethod=>authMethod(params));
   }catch (e){
     throw e;
   }
@@ -24,15 +25,18 @@ const authMethod = (params) => {
   }
 }
 
+const authMethod2 = (params) => {
+  console.log('in auth method2 ', params)
+  if(!params ||  params.password !=='pw'){
+    throw new Error(' Auth failed 2nd');
+  }
+}
+
 
 const processMap = {
   'contacts': {
-    authMethod: authMethod,
-    method: processContact,
-    email: 'student@gmail.com',
-    // ADMIN user (password is Password10) can read all lessons and also can login on behalf of other users
-    passwordDigest: '$argon2i$v=19$m=4096,t=3,p=1$vfrhde0OMBNSSE9rRWtVrQ$gBaNgJFPBZfzuvrzfX8iSr2+OCD8K8Iu/JjwpYp8/TY',
-    roles: ['STUDENT']
+    authMethods: [authMethod,authMethod2],
+    processMethod: processContact
   },
   'register': {
     id: 2,
@@ -50,8 +54,8 @@ const process = (objectKey, params) =>{
   const processObject =  processMap[objectKey];
   let authFailed = false;
   try{
-    checkAuthIfRequired(params,processObject.authMethod);
-    return processObject.method(params);
+    checkAuthIfRequired(params,processObject.authMethods);
+    return processObject.processMethod(params);
   }catch (e){
     return { success: false, message: e.message};
   }
@@ -60,7 +64,8 @@ const process = (objectKey, params) =>{
 }
 
 const result = process('contacts', {
-  user: 'joe'
+  user: 'joe',
+  password: 'pw'
 });
 
 console.log('result', result);
