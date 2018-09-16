@@ -17,13 +17,17 @@ const testGetUsers  = async ()=> {
   console.log('get users', result);
 }
 
-const testRouting =  async (key)=>{
-  const result = await process('users', {});
+const testRouting =  async (key, params)=>{
+  const result = await process(key, params);
   console.log(`${key} result ${JSON.stringify(result)}`);
 
 }
 //testContactGetAll();
 //testGetUsers();
 //testRegisterUser();
-testRouting('users');
+testRouting('/register',{ email:"username3",
+  firstName: "jill" ,
+  lastName: "george",
+  password: "testtest"
+});
 

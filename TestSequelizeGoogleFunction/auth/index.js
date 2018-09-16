@@ -20,7 +20,8 @@ const checkIfAuthenticateRequired = (params, authMethods)=>{
  * @param params
  */
 const loginAuth = (params)=>{
-  if(!params && params.username!=='test'){
+  console.log('login auth', params);
+  if(!params || params.username!=='test'){
     throw new Error('not authenticated');
   }
 }

@@ -4,14 +4,14 @@ const { checkIfAuthenticateRequired, loginAuth} = require('../auth');
 
 
 const processRouteMap = {
-  'getContacts': {
+  '/getContacts': {
     authMethods: [loginAuth],
     processMethod: getContacts
   },
-  'register': {
+  '/register': {
     processMethod: register
   },
-  'users': {
+  '/users': {
     processMethod: getAllUsers
   }
 
@@ -31,9 +31,9 @@ const process = async (key, params)=>{
   try{
     const processObject  = processRouteMap[key];
     if(!processObject || !processObject.processMethod){
-      return { success: false, message: `No handler for route ${key}`}
+      return { success: false, message: `No Route handler for route ${key}`}
     }
-    checkIfAuthenticateRequired(params);
+    checkIfAuthenticateRequired(params, processObject.authMethods);
     return await processObject.processMethod(params);
 
   }catch (e){
