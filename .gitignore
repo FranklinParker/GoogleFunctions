@@ -14,3 +14,4 @@ TestSequelizeGoogleFunction/node_modules
 TestSequelizeGoogleFunction/npm
 TestSequelizeGoogleFunction/getContacts.zip
 TestSequelizeGoogleFunction/contacts.zip
+.DS_Store
