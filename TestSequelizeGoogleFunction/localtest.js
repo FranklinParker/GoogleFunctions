@@ -32,6 +32,6 @@ testRouting('/register?name=test', {
         lastName: "george",
         password: "testtest"
     },
-    headers: {'x-auth': 'test'}
+    headers: {'x-auth': 'test1'}
 });
 

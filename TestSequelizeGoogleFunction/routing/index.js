@@ -1,19 +1,19 @@
 const {getContacts} = require('../services/contactservice');
-const { getAllUsers,register } = require('../services/userservice');
-const { checkIfAuthenticateRequired, loginAuth} = require('../auth');
+const {getAllUsers, register} = require('../services/userservice');
+const {checkIfAuthenticateRequired, loginAuth} = require('../auth');
 
 
 const processRouteMap = {
-  '/getContacts': {
-    authMethods: [loginAuth],
-    processMethod: getContacts
-  },
-  '/register': {
-    processMethod: register
-  },
-  '/users': {
-    processMethod: getAllUsers
-  }
+    '/getContacts': {
+        authMethods: [loginAuth],
+        processMethod: getContacts
+    },
+    '/register': {
+        processMethod: register,
+    },
+    '/users': {
+        processMethod: getAllUsers
+    }
 
 };
 
@@ -25,9 +25,9 @@ const processRouteMap = {
  * @param url
  * @returns {string}
  */
-const getBaseUrl = (url)=>{
+const getBaseUrl = (url) => {
     const idx = url.indexOf('?');
-    return idx>-1? url.substr(0,idx): url;
+    return idx > -1 ? url.substr(0, idx) : url;
 
 }
 
@@ -40,22 +40,22 @@ const getBaseUrl = (url)=>{
  * @returns {Promise<*>}
  */
 
-const process = async (key, params)=>{
-  try{
-    key = getBaseUrl(key);
-    const processObject  = processRouteMap[key];
-    if(!processObject || !processObject.processMethod){
-      return { success: false, message: `No Route handler for route ${key}`}
-    }
-    checkIfAuthenticateRequired(params, processObject.authMethods);
-    return await processObject.processMethod(params);
+const process = async (key, params) => {
+    try {
+        key = getBaseUrl(key);
+        const processObject = processRouteMap[key];
+        if (!processObject || !processObject.processMethod) {
+            return {success: false, message: `No Route handler for route ${key}`}
+        }
+        checkIfAuthenticateRequired(params, processObject.authMethods);
+        return await processObject.processMethod(params);
 
-  }catch (e){
-    return { success: false, message: e.message};
-  }
+    } catch (e) {
+        return {success: false, message: e.message};
+    }
 
 }
 
-module.exports ={
-  process
+module.exports = {
+    process
 }
