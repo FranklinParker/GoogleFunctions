@@ -12,6 +12,7 @@ const processRouteMap = {
         processMethod: register,
     },
     '/users': {
+        authMethods: [loginAuth],
         processMethod: getAllUsers
     }
 

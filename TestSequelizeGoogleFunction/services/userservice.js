@@ -2,7 +2,11 @@ const {findAllUsers, findUserByEmail, createUser} = require('../models/user').us
 
 const bcrypt = require('bcryptjs');
 
-
+/**
+ * gets all users in the DB
+ *
+ * @returns {Promise<*>}
+ */
 const getAllUsers = async () => findAllUsers();
 
 
