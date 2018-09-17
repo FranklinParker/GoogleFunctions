@@ -35,7 +35,6 @@ const getRequestData = (req)=> {
 const routeRequest = async function (req, res) {
   const url = req.url;
   const requestDataParams = getRequestData(req);
-  const params = req.body;
   try {
     const result = await  process(url, requestDataParams);
     res.status(200).send(result);
