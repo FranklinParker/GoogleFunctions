@@ -2,7 +2,25 @@ const ContactService = require('./services/contactservice');
 const UserService = require('./services/userservice');
 const cors = require('cors');
 const {process} = require('./routing');
+const extend = Object.assign;
 
+/**
+ * makes an object
+ *
+ * @param req
+ */
+const getRequestData = (req)=> {
+    const requestParams = {
+        body: req.body || {},
+        query: extend(extend({
+                $method: req.method
+            }, req.query || {}),
+            req.params || {}),
+        headers: req.headers
+    }
+    console.log('requestParams', requestParams);
+    return requestParams;
+}
 
 /**
  * route
@@ -14,9 +32,10 @@ const {process} = require('./routing');
  */
 const routeRequest = async function (req, res) {
   const url = req.url;
+  const requestDataParams = getRequestData(req);
   const params = req.body;
   try {
-    const result = await  process(url, params);
+    const result = await  process(url, requestDataParams);
     res.status(200).send(result);
   } catch (err) {
     res.status(200).send({success: false, error: err});

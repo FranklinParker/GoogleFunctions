@@ -12,7 +12,8 @@ const getAllUsers = async () => findAllUsers();
  *
  * @returns {Promise<{success: boolean, error: *}>}
  */
-const register = async (user) => {
+const register = async (requestData) => {
+  const user = requestData.body;
   try {
     const result = await findUserByEmail(user.email);
 
