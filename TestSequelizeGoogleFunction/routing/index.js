@@ -1,5 +1,5 @@
 const {getContacts} = require('../services/contactservice');
-const {getAllUsers, register} = require('../services/userservice');
+const {getAllUsers, register, login} = require('../services/userservice');
 const {checkIfAuthenticateRequired, loginAuth} = require('../auth');
 
 
@@ -10,6 +10,9 @@ const processRouteMap = {
     },
     '/register': {
         processMethod: register,
+    },
+    '/login': {
+        processMethod: login
     },
     '/users': {
         authMethods: [loginAuth],

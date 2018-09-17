@@ -25,13 +25,22 @@ const testRouting = async (key, params) => {
 //testContactGetAll();
 //testGetUsers();
 //testRegisterUser();
-testRouting('/register?name=test', {
+if(false) {
+    testRouting('/register?name=test', {
+        body: {
+            email: "username3",
+            firstName: "jill",
+            lastName: "george",
+            password: "testtest"
+        },
+        headers: {'x-auth': 'test1'}
+    });
+}
+
+testRouting('/login', {
     body: {
-        email: "username3",
-        firstName: "jill",
-        lastName: "george",
+        email: "username4",
         password: "testtest"
-    },
-    headers: {'x-auth': 'test1'}
+    }
 });
 
