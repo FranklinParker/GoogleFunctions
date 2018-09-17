@@ -1,6 +1,8 @@
 const {findAllUsers, findUserByEmail, createUser} = require('../models/user').userDB;
-
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { JWT_EXPIRES_SECONDS, JWT_SECRET} = require('../config');
+
 
 /**
  * gets all users in the DB
@@ -55,13 +57,15 @@ const login = async (reqParams) => {
         const isMatch = bcrypt.compareSync(user.password, result.record.password);
         if (isMatch) {
             const userRecord = result.record;
+            userRecord.password=undefined;
+            const token = jwt.sign({email: user.email},
+                JWT_SECRET, {expiresIn: JWT_EXPIRES_SECONDS});
             return {
-                success: true, user: {
-                    firstName: userRecord.firstName,
-                    lastName: userRecord.lastName,
-
-                }
-            };
+                success: true,
+                record: userRecord,
+                token: token,
+                expiresInSeconds: JWT_EXPIRES_SECONDS
+            }
         }else{
             return {success: false, message: 'Login failed'};
         }
