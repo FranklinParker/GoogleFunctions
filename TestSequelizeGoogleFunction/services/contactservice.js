@@ -10,7 +10,7 @@ const { Contact } = require('../models/contact').contactDB;
 const getContacts =  async () =>{
     try{
         const records = await Contact.findAll({
-            attributes: ['name', 'email']
+            //attributes: ['firstName','lastNaem', 'email']
         })
             .then(result=>{
                 const records = [];

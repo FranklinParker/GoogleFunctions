@@ -2,8 +2,13 @@ const connection = require('../dbconnection/initconnection').connection;
 const Sequelize = require('sequelize');
 
 const Contact = connection.define('contact', {
-        Name: Sequelize.STRING(50),
+        firstName: Sequelize.STRING(50),
+        lastName: Sequelize.STRING(50),
         email: Sequelize.STRING(100),
+        address: Sequelize.STRING(50),
+        city: Sequelize.STRING(50),
+        state: Sequelize.STRING(50),
+        zip: Sequelize.STRING(50),
 
     },
     {
