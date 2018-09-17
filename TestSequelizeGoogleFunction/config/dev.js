@@ -3,7 +3,7 @@ const config = {
     DB_USER: "foo",
     DB_PASSWORD: "bar",
     JWT_SECRET: 'hadhdsa;lds;',
-    JWT_EXPIRES_SECONDS: 300,
+    JWT_EXPIRES_SECONDS: 3000,
     sequelizeConfig: {
         host: '127.0.0.1',
         dialect: 'mysql',
