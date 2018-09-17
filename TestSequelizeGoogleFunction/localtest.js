@@ -25,7 +25,7 @@ const testRouting =  async (key, params)=>{
 //testContactGetAll();
 //testGetUsers();
 //testRegisterUser();
-testRouting('/register',{ body:{ email:"username3",
+testRouting('/register?name=test',{ body:{ email:"username3",
   firstName: "jill" ,
   lastName: "george",
   password: "testtest"}
