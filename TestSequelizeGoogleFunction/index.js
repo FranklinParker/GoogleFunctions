@@ -5,7 +5,7 @@ const {process} = require('./routing');
 const extend = Object.assign;
 
 /**
- * makes an object
+ * makes a param bobject of from the request data
  *
  * @param req
  */
@@ -21,6 +21,8 @@ const getRequestData = (req)=> {
     console.log('requestParams', requestParams);
     return requestParams;
 }
+
+
 
 /**
  * route

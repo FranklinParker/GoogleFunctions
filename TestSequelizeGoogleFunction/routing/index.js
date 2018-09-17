@@ -19,6 +19,19 @@ const processRouteMap = {
 
 
 /**
+ * remove any query params out of key
+ *
+ *
+ * @param url
+ * @returns {string}
+ */
+const getBaseUrl = (url)=>{
+    const idx = url.indexOf('?');
+    return idx>-1? url.substr(0,idx): url;
+
+}
+
+/**
  * process request handler
  *
  *
@@ -29,6 +42,7 @@ const processRouteMap = {
 
 const process = async (key, params)=>{
   try{
+    key = getBaseUrl(key);
     const processObject  = processRouteMap[key];
     if(!processObject || !processObject.processMethod){
       return { success: false, message: `No Route handler for route ${key}`}
