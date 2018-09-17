@@ -47,11 +47,12 @@ User.removeAttribute('id');
  * @param user
  * @returns {Promise<void>}
  */
-const findUserByEmail = async (email) => {
-  console.log('find by :')
+const findUserByEmail = async (email, attributes) => {
+  const queryFields = attributes ? attributes:
+      ['firstName', 'lastName', 'email'];
   try {
     return User.findOne({
-      attributes: ['firstName', 'lastName', 'email'],
+      attributes: queryFields,
       where: {
         email: email
       }
@@ -62,11 +63,11 @@ const findUserByEmail = async (email) => {
           record: result.dataValues
         };
       } else {
-        return {found: false, error: false, user: undefined};
+        return {found: false, error: false, record: undefined};
       }
     });
   } catch (err) {
-    return {found: false, error: true, message: err};
+    return {found: false, error: true, message: err.message};
   }
 
 }

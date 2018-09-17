@@ -40,11 +40,34 @@ const register = async (requestData) => {
     }
 
 }
-
+/**
+ * login and confirm
+ *
+ *
+ * @param reqParams
+ * @returns {Promise<*>}
+ */
 const login = async (reqParams) => {
     const user = reqParams.body;
-    const result = await findUserByEmail(user.email);
-    return {success: true, result: result};
+    const attributes = ['firstName', 'lastName', 'email', 'password'];
+    const result = await findUserByEmail(user.email, attributes);
+    if (result && result.found) {
+        const isMatch = bcrypt.compareSync(user.password, result.record.password);
+        if (isMatch) {
+            const userRecord = result.record;
+            return {
+                success: true, user: {
+                    firstName: userRecord.firstName,
+                    lastName: userRecord.lastName,
+
+                }
+            };
+        }else{
+            return {success: false, message: 'Login failed'};
+        }
+    } else {
+        return {success: false, message: 'Login failed'};
+    }
 }
 
 module.exports = {

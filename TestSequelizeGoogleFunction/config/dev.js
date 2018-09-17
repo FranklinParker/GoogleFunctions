@@ -2,6 +2,7 @@ const config = {
     DB_SCHMEMA: "test_schema",
     DB_USER: "foo",
     DB_PASSWORD: "bar",
+    JWT_SECRET: 'hadhdsa;lds;',
     sequelizeConfig: {
         host: '127.0.0.1',
         dialect: 'mysql',
