@@ -54,6 +54,8 @@ const process = async (key, params) => {
             return {success: false, message: `No Route handler for route ${key}`}
         }
         checkIfAuthenticateRequired(params, processObject.authMethods);
+        console.log('process after auth check - params', params);
+
         return await processObject.processMethod(params);
 
     } catch (e) {

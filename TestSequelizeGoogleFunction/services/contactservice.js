@@ -8,6 +8,7 @@ const { Contact, insertNewContact } = require('../models/contact').contactDB;
  * @returns {Promise<{success: boolean, error: *}>}
  */
 const getContacts =  async () =>{
+
     try{
         const records = await Contact.findAll({
             //attributes: ['firstName','lastNaem', 'email']

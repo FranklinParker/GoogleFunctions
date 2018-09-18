@@ -21,12 +21,7 @@ const  testGetContacts = async () =>{
     const result =  await getLogin();
 
     const contactResult = await testRouting('/getContacts', {
-        body: {
-            email: "username3",
-            firstName: "jill",
-            lastName: "george",
-            password: "testtest"
-        },
+
         headers: {
             'x-auth':  result.token
         }
