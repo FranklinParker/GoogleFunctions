@@ -34,7 +34,7 @@ const  testGetContacts = async () =>{
 const  testUpdateContact = async () =>{
     const result =  await  getLogin();
 
-    const contactResult = await testRouting('/updateContact', {
+    const contactResult = await testRouting('/contacts', {
         body: {
             id: 8,
             firstName: "Updated",

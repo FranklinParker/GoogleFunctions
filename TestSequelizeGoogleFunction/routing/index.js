@@ -4,7 +4,7 @@ const {checkIfAuthenticateRequired, loginAuth} = require('../auth');
 
 
 const processRouteMap = {
-    'contacts': {
+    '/contacts': {
         'GET': {
             authMethods: [loginAuth],
             processMethod: getContacts
@@ -18,7 +18,7 @@ const processRouteMap = {
             processMethod: updateContact
         }
     },
-    'user':{
+    '/user':{
         'GET': {
             authMethods: [loginAuth],
             processMethod: getAllUsers
@@ -28,7 +28,7 @@ const processRouteMap = {
         }
 
     },
-    'auth':{
+    '/auth':{
 
         'POST':{
             processMethod: login
@@ -66,13 +66,14 @@ const process = async (key, params) => {
         console.log(params);
         const method =  params.query.$method;
         const processObject = processRouteMap[key];
-        if (!processObject || processObject[method]) {
+        console.log('processObject', processObject);
+        if (!processObject || !processObject[method]) {
             return {success: false, message: `No Route handler for route ${key}.${method}`}
         }
         checkIfAuthenticateRequired(params, processObject.authMethods);
         console.log('process after auth check - params', params);
 
-        return await processObject.processMethod(params);
+        return await processObject[method].processMethod(params);
 
     } catch (e) {
         return {success: false, message: e.message};
