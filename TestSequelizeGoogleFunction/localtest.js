@@ -41,6 +41,7 @@ const  testUpdateContact = async () =>{
             lastName: "Name",
 
         },
+        query:{ $method: 'PUT'},
         headers: {
             'x-auth': result.token
         }
