@@ -44,6 +44,7 @@ const Contact = connection.define('contact', {
 const insertNewContact =  async (contact) =>{
     try {
         const newContact = await Contact.create(contact);
+        return newContact;
     }catch (e) {
         throw e;
 

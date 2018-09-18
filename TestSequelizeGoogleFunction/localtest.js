@@ -40,15 +40,19 @@ const  testCreateContact = async () =>{
 
     const contactResult = await testRouting('/addContact', {
         body: {
-            email: "username3",
-            firstName: "jill",
-            lastName: "george"
+            email: "jj@mail.com",
+            firstName: "Jack",
+            lastName: "Jones",
+            address: '1 main st',
+            city: 'new york',
+            state: 'NY',
+            zip: '10029'
         },
         headers: {
             'x-auth': result.token
         }
     });
-    console.log('creat contact', contactResult);
+    console.log(' contact created', contactResult);
 
 }
 
