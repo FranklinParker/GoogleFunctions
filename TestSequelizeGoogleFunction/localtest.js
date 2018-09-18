@@ -38,12 +38,11 @@ const  testGetUsers = async () =>{
 const  testCreateContact = async () =>{
     const result =  await  getLogin();
 
-    const contactResult = await testRouting('/getContacts', {
+    const contactResult = await testRouting('/addContact', {
         body: {
             email: "username3",
             firstName: "jill",
-            lastName: "george",
-            password: "testtest"
+            lastName: "george"
         },
         headers: {
             'x-auth': result.token
@@ -53,4 +52,4 @@ const  testCreateContact = async () =>{
 
 }
 
-testGetUsers();
+testCreateContact();
