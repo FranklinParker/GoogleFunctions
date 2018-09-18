@@ -1,4 +1,4 @@
-const { Contact, insertNewContact } = require('../models/contact').contactDB;
+const { Contact, insertNewContact,updateContactRecord } = require('../models/contact').contactDB;
 
 
 /**
@@ -37,14 +37,31 @@ const getContacts =  async () =>{
 const createNewContact = async (params)=>{
     try{
         const contact = params.body;
-        const record  = await insertNewContact(contact);
-        return{  success: true, record: record};
+        const recordCount  = await insertNewContact(contact);
+        return{  success: true, rowsUpdated: recordCount};
+    }catch(e){
+        return { success: false, message: e.message}
+    }
+}
+/**
+ * update contact
+ *
+ *
+ * @param params
+ * @returns {Promise<*>}
+ */
+const updateContact = async (params)=>{
+    try{
+        const contact = params.body;
+        const result  = await updateContactRecord(contact);
+        return{  success: true, result: result};
     }catch(e){
         return { success: false, message: e.message}
     }
 }
 module.exports = {
     getContacts,
-    createNewContact
+    createNewContact,
+    updateContact
 
 }

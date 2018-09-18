@@ -31,6 +31,25 @@ const  testGetContacts = async () =>{
 }
 
 
+const  testUpdateContact = async () =>{
+    const result =  await  getLogin();
+
+    const contactResult = await testRouting('/updateContact', {
+        body: {
+            id: 8,
+            firstName: "Updated",
+            lastName: "Name",
+
+        },
+        headers: {
+            'x-auth': result.token
+        }
+    });
+    console.log(' contact udpdated', contactResult);
+
+}
+
+
 const  testCreateContact = async () =>{
     const result =  await  getLogin();
 
@@ -54,7 +73,8 @@ const  testCreateContact = async () =>{
 
 
 
-const methodsToTest = [testGetContacts];
+
+const methodsToTest = [testUpdateContact];
 
 
 methodsToTest.forEach(method=> method());

@@ -50,7 +50,28 @@ const insertNewContact =  async (contact) =>{
 
     }
 }
+/**
+ * update a contact
+ *
+ *
+ * @param contact
+ * @returns {Promise<*>}
+ */
+const updateContactRecord =  async (contact) =>{
+    const id = contact.id;
+    try {
+        const updateCount = await Contact.update(
+            contact,
+            {where: {id: id}}
+        );
+        return updateCount;
+    }catch (e) {
+        throw e;
+
+    }
+}
 module.exports.contactDB ={
     Contact,
-    insertNewContact
+    insertNewContact,
+    updateContactRecord
 }
