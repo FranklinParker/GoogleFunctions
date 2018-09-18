@@ -11,7 +11,7 @@ drop table contact;
     `zip` varchar(50) DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  ) ;
 
 
 INSERT INTO contact (firstName,lastName,email) VALUES('jill','jones','jj@aol.com');
