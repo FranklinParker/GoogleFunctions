@@ -1,5 +1,6 @@
 const {process} = require('./routing');
 
+
 const testRouting = async (key, params) => {
     const result = await process(key, params);
     return result;
@@ -16,7 +17,7 @@ const  getLogin = async () =>{
 
 }
 
-const  testGetUsers = async () =>{
+const  testGetContacts = async () =>{
     const result =  await getLogin();
 
     const contactResult = await testRouting('/getContacts', {
@@ -56,4 +57,9 @@ const  testCreateContact = async () =>{
 
 }
 
-testCreateContact();
+
+
+const methodsToTest = [testGetContacts];
+
+
+methodsToTest.forEach(method=> method());
