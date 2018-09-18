@@ -7,11 +7,12 @@ const testRouting = async (key, params) => {
 
 }
 const  getLogin = async () =>{
-    const result =  await  testRouting('/login', {
+    const result =  await  testRouting('/auth', {
         body: {
             email: "username3",
             password: "testtest"
-        }
+        },
+        query:{ $method: 'POST'},
     });
     return result;
 
