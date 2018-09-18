@@ -33,8 +33,23 @@ const Contact = connection.define('contact', {
         // tableName: 'my_very_custom_table_name'
     });
 
+/***
+ * creates a new contact
+ *
+ *
+ *
+ * @param contact
+ * @returns {Promise<void>}
+ */
+const insertNewContact =  async (contact) =>{
+    try {
+        const newContact = await Contact.create(contact);
+    }catch (e) {
+        throw e;
 
-
+    }
+}
 module.exports.contactDB ={
-    Contact
+    Contact,
+    insertNewContact
 }

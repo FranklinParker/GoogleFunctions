@@ -1,4 +1,4 @@
-const { Contact } = require('../models/contact').contactDB;
+const { Contact, insertNewContact } = require('../models/contact').contactDB;
 
 
 /**
@@ -27,7 +27,23 @@ const getContacts =  async () =>{
 
 }
 
+/**
+ * creates a new contact
+ *
+ *
+ * @param contact
+ */
+const createNewContact = async (params)=>{
+    try{
+        const contact = params.body;
+        const record  = await insertNewContact(contact);
+        return{  success: true, record: record};
+    }catch(e){
+        return { success: false, message: e.message}
+    }
+}
 module.exports = {
-    getContacts
+    getContacts,
+    createNewContact
 
 }
