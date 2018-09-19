@@ -37,8 +37,8 @@ const getContacts =  async () =>{
 const createNewContact = async (params)=>{
     try{
         const contact = params.body;
-        const recordCount  = await insertNewContact(contact);
-        return{  success: true, rowsUpdated: recordCount};
+        const record  = await insertNewContact(contact);
+        return{  success: true, record: record};
     }catch(e){
         return { success: false, message: e.message}
     }

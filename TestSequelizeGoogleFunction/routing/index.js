@@ -4,28 +4,38 @@ const {checkIfAuthenticateRequired, loginAuth} = require('../auth');
 
 
 const processRouteMap = {
-    '/getContacts': {
-        authMethods: [loginAuth],
-        processMethod: getContacts
+    '/contacts': {
+        'GET': {
+            authMethods: [loginAuth],
+            processMethod: getContacts
+        },
+        'POST':{
+            authMethods: [loginAuth],
+            processMethod: createNewContact
+        },
+        'PUT':{
+            authMethods: [loginAuth],
+            processMethod: updateContact
+        }
     },
-    '/register': {
-        processMethod: register,
+    '/user':{
+        'GET': {
+            authMethods: [loginAuth],
+            processMethod: getAllUsers
+        },
+        'POST':{
+            processMethod: register
+        }
+
     },
-    '/login': {
-        processMethod: login
-    },
-    '/users': {
-        authMethods: [loginAuth],
-        processMethod: getAllUsers
-    },
-    '/addContact': {
-        authMethods: [loginAuth],
-        processMethod: createNewContact
-    },
-    '/updateContact': {
-        authMethods: [loginAuth],
-        processMethod: updateContact
-    },
+    '/auth':{
+
+        'POST':{
+            processMethod: login
+        }
+
+    }
+
 }
 
 /**
@@ -53,14 +63,17 @@ const getBaseUrl = (url) => {
 const process = async (key, params) => {
     try {
         key = getBaseUrl(key);
+        console.log(params);
+        const method =  params.query.$method;
         const processObject = processRouteMap[key];
-        if (!processObject || !processObject.processMethod) {
-            return {success: false, message: `No Route handler for route ${key}`}
+        console.log('processObject', processObject);
+        if (!processObject || !processObject[method]) {
+            return {success: false, message: `No Route handler for route ${key}.${method}`}
         }
-        checkIfAuthenticateRequired(params, processObject.authMethods);
+        checkIfAuthenticateRequired(params, processObject[method].authMethods);
         console.log('process after auth check - params', params);
 
-        return await processObject.processMethod(params);
+        return await processObject[method].processMethod(params);
 
     } catch (e) {
         return {success: false, message: e.message};

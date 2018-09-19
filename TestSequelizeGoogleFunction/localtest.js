@@ -7,11 +7,12 @@ const testRouting = async (key, params) => {
 
 }
 const  getLogin = async () =>{
-    const result =  await  testRouting('/login', {
+    const result =  await  testRouting('/auth', {
         body: {
             email: "username3",
             password: "testtest"
-        }
+        },
+        query:{ $method: 'POST'},
     });
     return result;
 
@@ -34,13 +35,14 @@ const  testGetContacts = async () =>{
 const  testUpdateContact = async () =>{
     const result =  await  getLogin();
 
-    const contactResult = await testRouting('/updateContact', {
+    const contactResult = await testRouting('/contacts', {
         body: {
             id: 8,
             firstName: "Updated",
             lastName: "Name",
 
         },
+        query:{ $method: 'PUT'},
         headers: {
             'x-auth': result.token
         }
