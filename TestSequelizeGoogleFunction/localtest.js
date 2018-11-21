@@ -1,9 +1,9 @@
-const {process} = require('./routing');
-
-
 const testRouting = async (key, params) => {
-    const result = await process(key, params);
-    return result;
+
+
+  const result = await process(key, params);
+  return result;
+  const {process} = require('./routing');
 
 }
 const  getLogin = async () =>{
